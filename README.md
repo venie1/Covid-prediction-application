@@ -23,4 +23,4 @@
     Repetition for Multiple Countries:
         The code repeats the forecasting process for different countries by grouping the data for each country and following similar steps.
 
-There is also a pick
+There is also a pickle model  , it  sets up a web application that allows users to upload COVID-19 data, select a prediction model, and get visualizations of the predictions for future days based on the chosen model. It serves as an interface for interacting with the trained time series forecasting models.
