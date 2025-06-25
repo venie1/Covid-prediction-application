@@ -9,15 +9,13 @@ A **Flask** web application for forecasting COVID-19 cases and deaths using mult
 ## 📋 Table of Contents
 
 1. [Features](#features)
-2. [Demo](#demo)
-3. [Tech Stack](#tech-stack)
-4. [Repository Structure](#repository-structure)
-5. [Installation](#installation)
+2. [Tech Stack](#tech-stack)
+3. [Repository Structure](#repository-structure)
+4. [Installation](#installation)
 6. [Usage](#usage)
 7. [Results & Evaluation](#results--evaluation)
 8. [Testing & CI](#testing--ci)
-9. [Contributing](#contributing)
-10. [License](#license)
+
 
 ---
 
@@ -34,14 +32,6 @@ A **Flask** web application for forecasting COVID-19 cases and deaths using mult
 * **Web Interface**: Flask app to upload CSVs, select forecast horizon and model, and view prediction plots in real time.
 * **Benchmarking**: Automated RMSE computation across all models for validation and test sets.
 * **Containerized Deployment**: Docker support for easy reproducibility.
-
----
-
-## 🎥 Demo
-
-![App Screenshot](docs/screenshot.png)
-
-> **Live Demo:** [https://covid-forecast-app.demo](https://covid-forecast-app.demo) *(coming soon)*
 
 ---
 
