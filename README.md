@@ -158,4 +158,4 @@ Licensed under the **MIT License**. See [LICENSE](LICENSE) for full terms.
 
 ---
 
-*Developed by Your Name – passionate about translating data into actionable insights.*
+*Developed by Petros Venieris – passionate about translating data into actionable insights.*
