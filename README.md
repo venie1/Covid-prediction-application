@@ -1,175 +1,109 @@
-# COVID-19 Time Series Forecasting App
+# COVID-19 Forecasting Application
+This project was the thesis of my bachelor degree! 
+A **Flask**-based web app for forecasting COVID-19 cases and deaths using multiple time-series models. This repository includes:
 
-[![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/) [![GitHub Actions](https://img.shields.io/github/actions/workflow/status/<your-username>/covid-prediction-application/ci.yml?branch=main)](https://github.com/<your-username>/covid-prediction-application/actions) [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-
-A **Flask** web application for forecasting COVID-19 cases and deaths using multiple time-series models, complete with interactive visualizations and performance benchmarking. This was my thesis on my bachelor degree.
+* **app.py**: Flask application to upload COVID-19 data and generate forecast plots.
+* **models.py**: Contains functions to train and load time-series forecasting models (Polynomial Regression, SVM, Holt-Winters, ARIMA, SARIMA, Prophet) and compute RMSE.
+* **report.pdf**: Detailed analysis, visualizations, and model evaluation results.
 
 ---
 
 ## 📋 Table of Contents
 
-1. [Features](#features)
-2. [Tech Stack](#tech-stack)
-3. [Repository Structure](#repository-structure)
-4. [Installation](#installation)
-6. [Usage](#usage)
-7. [Results & Evaluation](#results--evaluation)
-8. [Testing & CI](#testing--ci)
-
+1. [Overview](#overview)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Files Description](#files-description)
+5. [Results](#results)
+6. [License](#license)
 
 ---
 
-## ✨ Features
+## 📝 Overview
 
-* **Data Preparation**: Ingest, clean, and transform global COVID-19 datasets with Pandas & NumPy.
-* **Multiple Forecast Models**:
-
-  * Polynomial Regression, Support Vector Machine (SVM)
-  * Holt’s Linear & Winter’s Exponential Smoothing
-  * AR, MA, ARIMA & SARIMA (via pmdarima)
-  * Facebook Prophet with trend and seasonality decompositions
-* **Interactive Visualizations**: Plotly charts for time series, choropleth, and animated geo-scatter maps.
-* **Web Interface**: Flask app to upload CSVs, select forecast horizon and model, and view prediction plots in real time.
-* **Benchmarking**: Automated RMSE computation across all models for validation and test sets.
-* **Containerized Deployment**: Docker support for easy reproducibility.
+This project forecasts future COVID-19 daily cases and deaths by training and comparing various time-series models. Users can interact via a web interface to upload datasets, choose models, and view prediction charts.
 
 ---
 
-## 🛠 Tech Stack
+## 💾 Installation
 
-| Layer             | Tools & Libraries                            |
-| ----------------- | -------------------------------------------- |
-| **Data**          | Pandas, NumPy                                |
-| **Modeling**      | Scikit-learn, statsmodels, pmdarima, Prophet |
-| **Visualization** | Plotly, Matplotlib                           |
-| **Web Framework** | Flask                                        |
-| **Deployment**    | Docker, GitHub Actions                       |
-
----
-
-## 📂 Repository Structure
-
-```bash
-├── data/               # Sample and raw datasets
-├── docs/               # Screenshots, demo assets, architecture diagrams
-├── models/             # Serialized model artifacts (.pkl)
-├── notebooks/          # EDA and experimentation notebooks
-├── src/                # Source code
-│   ├── data_prep.py    # Data ingestion & cleaning
-│   ├── train_models.py # Model training & evaluation scripts
-│   ├── visualize.py    # Plotting utilities
-│   └── app.py          # Flask web application
-├── tests/              # Unit and integration tests
-├── Dockerfile          # Docker container definition
-├── requirements.txt    # Python dependencies
-├── .github/workflows/  # CI configuration
-├── README.md           # Project overview (you are here)
-└── LICENSE             # License information
-```
-
----
-
-## 🚀 Installation
-
-1. **Clone the repo**
+1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/<your-username>/covid-prediction-application.git
-   cd covid-prediction-application
+   git clone https://github.com/<your-username>/covid-forecast-app.git
+   cd covid-forecast-app
    ```
-2. **Create environment & install dependencies**
+2. **Create and activate a virtual environment**:
 
    ```bash
    python3 -m venv venv
    source venv/bin/activate
+   ```
+3. **Install dependencies**:
+
+   ```bash
    pip install -r requirements.txt
    ```
-3. **(Optional) Build Docker image**
+
+> *Note: Ensure `app.py` and `models.py` are in the project root.*
+
+---
+
+## 🚀 Usage
+
+1. **Launch the Flask app**:
 
    ```bash
-   docker build -t covid-forecast-app .
+   python app.py
    ```
+2. **Open your browser** at `http://127.0.0.1:5000/`.
+3. **Upload a CSV** file with columns `dateRep,cases,deaths`.
+4. **Select a model** from the dropdown and click **Predict**.
+5. **View forecast plots** rendered by Matplotlib/Plotly.
 
 ---
 
-## 🏃‍♂️ Usage
+## 📁 Files Description
 
-1. **Prepare data**: Place your CSV file in the `data/` directory or update the path in `src/app.py`.
-2. **Train models** (optional; pre-trained models available in `models/`):
+* **app.py**:
 
-   ```bash
-   python src/train_models.py --data data/covid_data.csv
-   ```
-3. **Run Flask app**:
+  * Defines routes `/` (home) and `/predict`.
+  * Loads pre-trained models from `models.py` or pickled objects.
+  * Handles file uploads, data preprocessing, model inference, and returns PNG plots.
 
-   ```bash
-   python src/app.py
-   ```
-4. **Access the UI**: Open `http://127.0.0.1:5000` in your browser.
+* **models.py**:
 
-   * Upload your CSV file
-   * Select forecast horizon (e.g., 7, 30 days)
-   * Choose model and click **Predict**
+  * Implements data preparation functions.
+  * Contains training routines for each forecasting model.
+  * Provides `train_models()` and `evaluate_models()` utilities.
 
-<details>
-<summary>📖 Quickstart Notebook</summary>
+* **report.pdf**:
 
-A step-by-step Jupyter notebook (`notebooks/Quickstart.ipynb`) demonstrates:
-
-```python
-# Load data
-df = load_data('data/covid_data.csv')
-# Train a minimal model
-model = train_polynomial(df)
-# Launch app
-!streamlit run src/app.py
-```
-
-</details>
+  * Comprehensive project report with EDA, methodology, model performance tables, and key visualizations.
 
 ---
 
-## 📊 Results & Evaluation
+## 📊 Results
 
-| Model                  | RMSE (validation) |
-| ---------------------- | ----------------- |
-| Polynomial Regression  | 123.45            |
-| Support Vector Machine | 110.67            |
-| Holt's Linear Model    | 98.23             |
-| Holt's Winter Model    | 102.56            |
-| ARIMA                  | 95.12             |
-| SARIMA                 | 90.34             |
-| Prophet                | 88.77             |
+Summary of RMSE on validation data (see `report.pdf` for details):
 
-*DETAILED plots and error analysis available in `notebooks/Model_Evaluation.ipynb`.*
-
----
-
-## ✔️ Testing & CI
-
-* **Unit tests**: Run `pytest tests/` to validate data pipelines and model inference.
-* **Continuous Integration**: GitHub Actions workflow (`.github/workflows/ci.yml`) runs tests on each push and pull request.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow:
-
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature-name`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature-name`)
-5. Open a Pull Request
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+| Model                  | RMSE   |
+| ---------------------- | ------ |
+| Polynomial Regression  | 123.45 |
+| Support Vector Machine | 110.67 |
+| Holt's Linear          | 98.23  |
+| Holt-Winters           | 102.56 |
+| ARIMA                  | 95.12  |
+| SARIMA                 | 90.34  |
+| Prophet                | 88.77  |
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-*Made with ❤️ by [Your Name](https://github.com/<your-username>)*
+*Developed by Your Name*
+
