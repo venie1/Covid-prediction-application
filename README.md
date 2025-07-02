@@ -31,6 +31,7 @@ Tracking and forecasting COVID-19 cases/deaths empowers public health planning a
 * **Seasonal Patterns**: Weekly seasonality detected in confirmed cases via Prophet’s decomposition—weekday reporting lags highlighted the need for smoothers.
 * **Model Performance**: SARIMA and Facebook Prophet achieved lowest RMSE (≈90 & 88), outperforming simpler linear and SVM approaches by \~15%.
 * **Country-specific Trends**: Greece and neighboring countries exhibited distinct outbreak waves; interactive choropleths and geo-scatter maps reveal spatial diffusion over time.
+* **Improved Forecast Accuracy: Achieved 15% lower RMSE compared to baseline regressions—reducing over‑ or under‑provisioning of medical resources.
 
 ---
 
